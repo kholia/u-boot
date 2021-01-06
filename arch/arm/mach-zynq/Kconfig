@@ -37,18 +37,18 @@ config ZYNQ_DDRC_INIT
 
 config SYS_BOARD
 	string "Board name"
-	default "zynq"
+	default "ebaz4205"
 
 config SYS_VENDOR
 	string "Vendor name"
-	default "xilinx"
+	default "embedme"
 
 config SYS_SOC
 	default "zynq"
 
 config SYS_CONFIG_NAME
 	string "Board configuration name"
-	default "zynq-common"
+	default "zynq_ebaz4205"
 	help
 	  This option contains information about board configuration name.
 	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header

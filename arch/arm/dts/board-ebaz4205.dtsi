@@ -1,0 +1,77 @@
+/ {
+	chosen {
+		bootargs = "console=ttyPS0,115200 earlyprintk root=/dev/mmcblk0p2 rw";
+                stdout-path = "serial0:115200n8";
+	};
+
+        aliases {
+		ethernet0 = &gem0;
+		serial0 = &uart1;
+		mmc0 = &sdhci0;
+	};
+
+	memory@0 {
+		device_type = "memory";
+		reg = <0x0 0x10000000>;
+	};
+
+        leds {
+		compatible = "gpio-leds";
+
+		led-green {
+                        label = "led-green";
+			gpios = <&gpio0 55 1>;
+			default-state = "off";
+		};
+		led-red {
+                        label = "led-red";
+			gpios = <&gpio0 54 1>;
+			default-state = "off";
+		};
+        };
+
+        buttons {
+                compatible = "gpio-keys-polled";
+                poll-interval = <100>;
+
+                s2-button {
+                        gpios = <&gpio0 20 1>;
+                        label = "s2-button";
+                        default-state = "keep";
+                        linux,code = <106>;
+                        autorepeat;
+                };
+                s3-button {
+                        gpios = <&gpio0 32 1>;
+                        label = "s3-button";
+                        default-state = "keep";
+                        linux,code = <105>;
+                        autorepeat;
+                };
+        };
+};
+
+&uart1 {
+       u-boot,dm-pre-reloc;
+       status = "okay";
+};
+
+&gem0 {
+	status = "okay";
+        phy-mode = "rgmii-id";
+	phy-handle = <&ethernet_phy0>;
+
+	ethernet_phy0: ethernet-phy@0 {
+		reg = <0>;
+		device_type = "ethernet-phy";
+	};
+};
+
+&sdhci0 {
+	u-boot,dm-pre-reloc;
+	status = "okay";
+};
+
+&gpio0 {
+        gpio-mask-low = <0x5600>;
+};

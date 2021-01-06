@@ -1,0 +1,15 @@
+if TARGET_ZYNQ_EBAZ4205
+
+config SYS_BOARD
+       default "ebaz4205"
+
+config SYS_VENDOR
+       default "embedme"
+
+config SYS_SOC
+       default "zynq"
+
+config SYS_CONFIG_NAME
+       default "zynq-ebaz4205"
+
+endif
